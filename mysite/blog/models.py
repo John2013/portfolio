@@ -26,6 +26,7 @@ class Article(models.Model):
 	)
 	slug = models.CharField(max_length=255, unique=True, null=False)
 	body = models.TextField('Статья', null=False)
+	preview = models.TextField('Превью', null=False)
 	created_at = models.DateTimeField('Создана')
 	pub_date = models.DateTimeField('Дата публикации')
 	tags = models.ManyToManyField(Tag, )
