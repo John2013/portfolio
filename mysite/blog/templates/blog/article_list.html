@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block header %}<h1>{% block title %}Блог{% endblock %}</h1>{% endblock %}
+
+{% block content %}
+  <div class="row">
+    {% for article in page_obj %}
+      <div class="col-12">
+        <article class="article">
+          <header class="article__header row justify-content-between align-items-baseline">
+{#          <h2 class="article__title">{{ article.title }}</h2>#}
+            <h2 class="article__title col-auto" style="display: inline-block">{% lorem 2 w %}</h2>
+            <small class="article__time text-muted col-auto">
+              {{ article.pub_date | naturaltime }}
+            </small>
+{#          <p class="article__preview">{{ article.preview }}</p>#}
+          </header>
+
+          <p class="article__preview">{% lorem 1 %}</p>
+          <footer class="article-footer row justify-content-space-between">
+            <div class="article__tags-list col order-last order-sm-first">
+              {% for tag in article.tags.all %}
+                <a href="#">{{ tag.name }}</a>
+              {% endfor %}
+            </div>
+            <div class="col col-12 col-sm-auto order-first order-sm-last">
+              <a href="#" class="article__read-more btn btn-sm btn-outline-primary col">Читать далее →</a>
+            </div>
+          </footer>
+
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if is_paginated %}
+    <hr>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center pagination-sm">
+        {% if page_obj.has_previous %}
+          <!-- If it ain't a search result display, don't append the search query
+               to the URL. -->
+          {% if not search %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+            </li>
+          {% else %}
+            <!-- Append the searched query to the URL, so that on a search results page,
+                 the pagination don't revert to listing all the listview items. -->
+            <li class="page-item">
+              <a class="page-link" href="?{{ search }}&page={{ page_obj.previous_page_number }}"
+                 tabindex="-1">Previous</a>
+            </li>
+          {% endif %}
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="javascript:void(0);" tabindex="-1">Назад</a>
+          </li>
+        {% endif %}
+        {% for object in page_obj.paginator.page_range %}
+          <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+          {% if not search %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперёд</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?{{ search }}&page={{ page_obj.next_page_number }}">Вперёд</a>
+            </li>
+          {% endif %}
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="javascript:void(0);">Вперёд</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+
+{% endblock %}
