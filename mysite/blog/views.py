@@ -1,6 +1,7 @@
-from django.shortcuts import render
 from django.views import generic
+from .models import Article
 
 
 class IndexView(generic.ListView):
-	pass
+	model = Article
+	paginate_by = 10
