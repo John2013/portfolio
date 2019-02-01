@@ -9,7 +9,7 @@
       <div class="col-12">
         <article class="article">
           <header class="article__header row justify-content-between align-items-baseline">
-            <h2 class="article__title">{{ article.title }}</h2>
+            <h2 class="article__title col">{{ article.title }}</h2>
 {#            <h2 class="article__title col-auto" style="display: inline-block">{% lorem 2 w %}</h2>#}
             <small class="article__time text-muted col-auto">
               {{ article.pub_date | naturaltime }}
@@ -21,7 +21,7 @@
           <footer class="article-footer row justify-content-space-between">
             <div class="article__tags-list col order-last order-sm-first">
               {% for tag in article.tags.all %}
-                <a href="#">{{ tag.name }}</a>
+                <a href="{% url 'blog:by-tag' tag=tag.slug %}">{{ tag.name }}</a>
               {% endfor %}
             </div>
             <div class="col col-12 col-sm-auto order-first order-sm-last">
