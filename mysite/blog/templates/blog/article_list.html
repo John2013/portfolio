@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load humanize %}
 
 {% block header %}<h1>{% block title %}Блог{% endblock %}</h1>{% endblock %}
 
@@ -12,7 +11,7 @@
             <h2 class="article__title col">{{ article.title }}</h2>
 {#            <h2 class="article__title col-auto" style="display: inline-block">{% lorem 2 w %}</h2>#}
             <small class="article__time text-muted col-auto">
-              {{ article.pub_date | naturaltime }}
+              {{ article.pub_date|date:"DATETIME_FORMAT" }}
             </small>
           </header>
 
