@@ -24,7 +24,8 @@
               {% endfor %}
             </div>
             <div class="col col-12 col-sm-auto order-first order-sm-last">
-              <a href="#" class="article__read-more btn btn-sm btn-outline-primary col">Читать далее →</a>
+              <a href="{% url 'blog:detail' slug=article.slug %}"
+                 class="article__read-more btn btn-sm btn-outline-primary col">Читать далее →</a>
             </div>
           </footer>
 

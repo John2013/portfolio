@@ -11,3 +11,10 @@ class IndexView(generic.ListView):
 class TagView(IndexView):
 	def get_queryset(self):
 		return Article.objects.filter(tags__slug__contains=self.kwargs['tag'])
+
+
+class DetailView(generic.DetailView):
+	model = Article
+
+	def get_queryset(self):
+		return Article.objects.filter(slug=self.kwargs['slug'])

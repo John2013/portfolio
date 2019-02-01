@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block header %}<h1>{% block title %}{{ article.title }}{% endblock %}</h1>{% endblock %}
+
+{% block content %}
+  <div class="row">
+      <div class="col-12">
+        <article class="article-detail">
+          <header class="article-detail__header row justify-content-between align-items-baseline">
+            <small class="article-detail__time text-muted col-auto">
+              {{ article.pub_date|date:"DATETIME_FORMAT" }}
+            </small>
+          </header>
+
+          <p class="article-detail__body">{{ article.body }}</p>
+          <footer class="article-footer row justify-content-space-between">
+            <div class="article-detail__tags-list col order-last order-sm-first">
+              {% for tag in article.tags.all %}
+                <a href="{% url 'blog:by-tag' tag=tag.slug %}">{{ tag.name }}</a>
+              {% endfor %}
+            </div>
+          </footer>
+
+        </article>
+      </div>
+  </div>
+
+{% endblock %}
