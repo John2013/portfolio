@@ -9,15 +9,15 @@
       <div class="col-12">
         <article class="article">
           <header class="article__header row justify-content-between align-items-baseline">
-{#          <h2 class="article__title">{{ article.title }}</h2>#}
-            <h2 class="article__title col-auto" style="display: inline-block">{% lorem 2 w %}</h2>
+            <h2 class="article__title">{{ article.title }}</h2>
+{#            <h2 class="article__title col-auto" style="display: inline-block">{% lorem 2 w %}</h2>#}
             <small class="article__time text-muted col-auto">
               {{ article.pub_date | naturaltime }}
             </small>
-{#          <p class="article__preview">{{ article.preview }}</p>#}
           </header>
 
-          <p class="article__preview">{% lorem 1 %}</p>
+          <p class="article__preview">{{ article.preview }}</p>
+{#          <p class="article__preview">{% lorem 1 %}</p>#}
           <footer class="article-footer row justify-content-space-between">
             <div class="article__tags-list col order-last order-sm-first">
               {% for tag in article.tags.all %}
