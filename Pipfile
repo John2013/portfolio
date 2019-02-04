@@ -10,5 +10,8 @@ django = "*"
 python-slugify = "*"
 channels = "*"
 
+# для windows
+"pypiwin32" = "*"
+
 [requires]
 python_version = "3.7"
