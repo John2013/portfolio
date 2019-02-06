@@ -9,9 +9,8 @@ verify_ssl = true
 django = "*"
 python-slugify = "*"
 channels = "*"
-
-# для windows
 "pypiwin32" = "*"
+channels-redis = "*"
 
 [requires]
 python_version = "3.7"
