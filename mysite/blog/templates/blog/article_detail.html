@@ -49,51 +49,92 @@
     </div>
     <div class="comments__form">
       <div class="form-label-group">
-        <input type="text" id="chat-message-nickname" class="form-control" placeholder="Ваш ник" required=""
-               size="40">
+        <input type="text" id="chat-message-nickname" class="form-control" placeholder="Ваш ник" required="">
         <label for="chat-message-nickname">Ваш ник</label>
       </div>
       <div class="form-label-group">
-        <input type="text" id="chat-message-input" class="form-control" placeholder="Сообщение" required=""
-               size="100">
+        <input type="text" id="chat-message-input" class="form-control" placeholder="Сообщение" required="">
         <label for="chat-message-input">Сообщение</label>
       </div>
       <input id="chat-message-submit" type="button" class="btn btn-primary" value="Отправить"/>
     </div>
   </section>
 
-  {% comment %}  <script>
-    var roomName = {{ room_name_json }};
+  <!--suppress JSUnusedLocalSymbols -->
+  <script>
+    let roomName = '{{ article.slug }}';
 
-    var chatSocket = new WebSocket(
+    let chatSocket = new WebSocket(
       'ws://' + window.location.host +
       '/ws/chat/' + roomName + '/');
 
+    function getDateString(datetime){
+      datetime = new Date(datetime);
+      const date = datetime.toLocaleDateString();
+
+      let strDatetime = datetime.toLocaleTimeString().slice(0, -3);
+
+      if(date !== new Date().toLocaleDateString()){
+        strDatetime = date + ' ' + strDatetime
+      }
+
+      return strDatetime
+    }
+
+    function appendMessage(message, nickname, datetime) {
+      let commentsList = $("#commentsList");
+
+      datetime = getDateString(datetime);
+
+      let newComment = $(
+        "<article class=\"comment\">\n" +
+        "    <header class=\"comment__header row justify-content-between align-items-baseline\">\n" +
+        "         <h4 class=\"comment__author col\">" + nickname + "</h4>\n" +
+        "         <small class=\"comment__time text-muted col-auto\">" + datetime + "</small>\n" +
+        "    </header>\n" +
+        "    <div class=\"comment__body\">" + message + "</div>\n" +
+        "</article>"
+      );
+
+      commentsList.append(newComment)
+    }
+
     chatSocket.onmessage = function (e) {
-      var data = JSON.parse(e.data);
-      var message = data['message'];
-      document.querySelector('#chat-log').value += (message + '\n');
+      let data = JSON.parse(e.data);
+      let message = data['message'];
+      let nickname = data['nickname'];
+      let datetime = data['datetime'];
+
+      appendMessage(message, nickname, datetime)
     };
 
     chatSocket.onclose = function (e) {
       console.error('Chat socket closed unexpectedly');
     };
 
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function (e) {
+    let inputMessage = document.querySelector('#chat-message-input');
+    let inputNickname = document.querySelector('#chat-message-nickname');
+    let submit = document.querySelector('#chat-message-submit');
+
+    inputMessage.onkeyup = function (e) {
       if (e.keyCode === 13) {  // enter, return
-        document.querySelector('#chat-message-submit').click();
+        submit.click();
       }
     };
 
-    document.querySelector('#chat-message-submit').onclick = function (e) {
-      var messageInputDom = document.querySelector('#chat-message-input');
-      var message = messageInputDom.value;
+    submit.onclick = function (e) {
+      let messageInputDom = inputMessage;
+      let nicknameInputDom = inputNickname;
+
+      let message = messageInputDom.value;
+      let nickname = nicknameInputDom.value;
       chatSocket.send(JSON.stringify({
-        'message': message
+        'message': message,
+        'nickname': nickname,
+        'datetime': new Date().toJSON()
       }));
 
       messageInputDom.value = '';
     };
-  </script>{% endcomment %}
+  </script>
 {% endblock %}
