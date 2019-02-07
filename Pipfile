@@ -9,7 +9,6 @@ verify_ssl = true
 django = "*"
 python-slugify = "*"
 channels = "*"
-"pypiwin32" = "*"
 channels-redis = "*"
 
 [requires]

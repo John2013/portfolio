@@ -3,26 +3,97 @@
 {% block header %}<h1>{% block title %}{{ article.title }}{% endblock %}</h1>{% endblock %}
 
 {% block content %}
-  <div class="row">
-      <div class="col-12">
-        <article class="article-detail">
-          <header class="article-detail__header row justify-content-between align-items-baseline">
-            <small class="article-detail__time text-muted col-auto">
-              {{ article.pub_date|date:"DATETIME_FORMAT" }}
-            </small>
-          </header>
+  <section class="article-detail">
+    <header class="article-detail__header row justify-content-between align-items-baseline">
+      <small class="article-detail__time text-muted col-auto">
+        {{ article.pub_date|date:"DATETIME_FORMAT" }}
+      </small>
+    </header>
 
-          <p class="article-detail__body">{{ article.body }}</p>
-          <footer class="article-footer row justify-content-space-between">
-            <div class="article-detail__tags-list col order-last order-sm-first">
-              {% for tag in article.tags.all %}
-                <a href="{% url 'blog:by-tag' tag=tag.slug %}">{{ tag.name }}</a>
-              {% endfor %}
-            </div>
-          </footer>
-
-        </article>
+    <p class="article-detail__body">{{ article.body }}</p>
+    <footer class="article-footer row justify-content-space-between">
+      <div class="article-detail__tags-list col order-last order-sm-first">
+        {% for tag in article.tags.all %}
+          <a href="{% url 'blog:by-tag' tag=tag.slug %}">{{ tag.name }}</a>
+        {% endfor %}
       </div>
-  </div>
+    </footer>
 
+  </section>
+
+  <section class="comments">
+    <h2 class="comments__title">Комментарии</h2>
+    <div class="comments__list" id="commentsList">
+      <article class="comment">
+        <header class="comment__header row justify-content-between align-items-baseline">
+          <h4 class="comment__author col">author</h4>
+          <small class="comment__time text-muted col-auto">07.02.2019 14:35</small>
+        </header>
+
+        <div class="comment__body">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ipsum labore optio placeat? Aut commodi
+          consequuntur cum dignissimos enim est, facere fugit nemo nihil quibusdam quo tempora, ullam!
+        </div>
+      </article>
+      <article class="comment">
+        <header class="comment__header row justify-content-between align-items-baseline">
+          <h4 class="comment__author col">author</h4>
+          <small class="comment__time text-muted col-auto">07.02.2019 14:35</small>
+        </header>
+
+        <div class="comment__body">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ipsum labore optio placeat? Aut commodi
+          consequuntur cum dignissimos enim est, facere fugit nemo nihil quibusdam quo tempora, ullam!
+        </div>
+      </article>
+    </div>
+    <div class="comments__form">
+      <div class="form-label-group">
+        <input type="text" id="chat-message-nickname" class="form-control" placeholder="Ваш ник" required=""
+               size="40">
+        <label for="chat-message-nickname">Ваш ник</label>
+      </div>
+      <div class="form-label-group">
+        <input type="text" id="chat-message-input" class="form-control" placeholder="Сообщение" required=""
+               size="100">
+        <label for="chat-message-input">Сообщение</label>
+      </div>
+      <input id="chat-message-submit" type="button" class="btn btn-primary" value="Отправить"/>
+    </div>
+  </section>
+
+  {% comment %}  <script>
+    var roomName = {{ room_name_json }};
+
+    var chatSocket = new WebSocket(
+      'ws://' + window.location.host +
+      '/ws/chat/' + roomName + '/');
+
+    chatSocket.onmessage = function (e) {
+      var data = JSON.parse(e.data);
+      var message = data['message'];
+      document.querySelector('#chat-log').value += (message + '\n');
+    };
+
+    chatSocket.onclose = function (e) {
+      console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function (e) {
+      if (e.keyCode === 13) {  // enter, return
+        document.querySelector('#chat-message-submit').click();
+      }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function (e) {
+      var messageInputDom = document.querySelector('#chat-message-input');
+      var message = messageInputDom.value;
+      chatSocket.send(JSON.stringify({
+        'message': message
+      }));
+
+      messageInputDom.value = '';
+    };
+  </script>{% endcomment %}
 {% endblock %}
