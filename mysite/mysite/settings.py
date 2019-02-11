@@ -24,14 +24,17 @@ SECRET_KEY = 'o+jen=z&d8*rojc7i8yy$6i&@lmh5a*(*$sa($sdb_m1=sjzoh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+	'194.58.122.85',
+	'127.0.0.1',
+]
 
 # Application definition
 
 INSTALLED_APPS = [
 	'channels',
 	'blog',
-	'chat',
+	# 'chat',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -129,3 +132,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(
+	os.path.abspath(
+		os.path.dirname(__file__)
+	),
+	'static_files'
+)

@@ -10,6 +10,7 @@ django = "*"
 python-slugify = "*"
 channels = "*"
 channels-redis = "*"
+daphne = "*"
 
 [requires]
 python_version = "3.7"
