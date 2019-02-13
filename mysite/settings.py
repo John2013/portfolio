@@ -27,6 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
 	'194.58.122.85',
 	'127.0.0.1',
+	'codocalypse.herokuapp.com'
 ]
 
 # Application definition
