@@ -1,18 +1,17 @@
 import datetime
-from uuid import uuid4
 
 from django.db import models
 from django.utils import timezone
 from slugify import slugify
 
 
-def get_slug_temp_value():
-	return '_{}'.format(uuid4())
-
-
 class Tag(models.Model):
 	name = models.CharField('Тэг', max_length=255, null=False, unique=True)
 	slug = models.SlugField(unique=True, blank=True, null=False)
+
+	class Meta:
+		verbose_name = "Тег"
+		verbose_name_plural = "Теги"
 
 	def __str__(self):
 		return self.name
@@ -77,6 +76,10 @@ class Article(models.Model):
 	was_published_recently.admin_order_field = 'pub_date'
 	was_published_recently.boolean = True
 	was_published_recently.short_description = 'Опубликовано недавно?'
+
+	class Meta:
+		verbose_name = "Пост"
+		verbose_name_plural = "Посты"
 
 	def save(self, *args, **kwargs):
 
