@@ -3,7 +3,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer, \
 	WebsocketConsumer
 import json
 
-from blog.models import Comment
+from blog.models import Comment, Article
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -38,7 +38,7 @@ class ChatConsumer(WebsocketConsumer):
 		article_pk = text_data_json['articlePk']
 
 		comment = Comment(
-			article_id=article_pk,
+			article=Article.objects.get(article_pk),
 			body=message,
 			nickname=nickname,
 			datetime=datetime
