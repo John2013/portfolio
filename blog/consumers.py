@@ -6,7 +6,7 @@ import json
 from blog.models import Comment, Article
 
 
-class ChatConsumer(WebsocketConsumer):
+class ChatConsumer(AsyncWebsocketConsumer):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.room_name = self.scope['url_route']['kwargs']['room_name']
