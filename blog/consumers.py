@@ -37,14 +37,6 @@ class ChatConsumer(WebsocketConsumer):
 		datetime = text_data_json['datetime']
 		article_pk = text_data_json['articlePk']
 
-		comment = Comment(
-			article_id=article_pk,
-			body=message,
-			nickname=nickname,
-			datetime=datetime
-		)
-		comment.save()
-
 		# Send message to room group
 		async_to_sync(self.channel_layer.group_send)(
 			self.room_group_name,
@@ -55,6 +47,14 @@ class ChatConsumer(WebsocketConsumer):
 				'datetime': datetime,
 			}
 		)
+
+		comment = Comment(
+			article_id=article_pk,
+			body=message,
+			nickname=nickname,
+			datetime=datetime
+		)
+		comment.save()
 
 	# Receive message from room group
 	def chat_message(self, event):
