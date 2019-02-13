@@ -28,7 +28,7 @@
         <article class="comment">
         <header class="comment__header row justify-content-between align-items-baseline">
           <h4 class="comment__author col">{{ comment.nickname }}</h4>
-          <small class="comment__time text-muted col-auto">{{ comment.date|date:"DATETIME_FORMAT" }}</small>
+          <small class="comment__time text-muted col-auto">{{ comment.datetime|date:"DATETIME_FORMAT" }}</small>
         </header>
 
         <div class="comment__body">{{ comment.body }}</div>
