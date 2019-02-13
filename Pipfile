@@ -14,7 +14,7 @@ channels-redis = "*"
 daphne = "*"
 django-heroku = "*"
 "psycopg2-binary" = "*"
-twisted = "*"
+twisted = {version = "*", extras = ["tls", "http2"]}
 
 [requires]
 python_version = "3.7"
