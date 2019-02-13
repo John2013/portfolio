@@ -98,8 +98,11 @@ class Article(models.Model):
 
 class Comment(models.Model):
 	body = models.TextField('Текст', null=False)
-	nickname = models.TextField('Текст', null=False)
-	datetime = models.DateTimeField('Текст', null=False, blank=True)
+	nickname = models.CharField('Ник', null=False, max_length=255)
+	datetime = models.DateTimeField('Дата', null=False, blank=True)
+	article = models.ForeignKey(
+		'Article', on_delete=models.CASCADE, null=False
+	)
 
 	def save(self, *args, **kwargs):
 
