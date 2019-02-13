@@ -23,7 +23,7 @@ class DetailView(generic.DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['comments'] = self.article.get().comments_set.order_by(
+		context['comments'] = self.article.get().comment_set.order_by(
 			'datetime'
 		).desc().all()
 		return context
