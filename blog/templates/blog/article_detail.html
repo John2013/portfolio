@@ -63,6 +63,7 @@
   <!--suppress JSUnusedLocalSymbols -->
   <script>
     let roomName = '{{ article.slug }}';
+    let articlePk = '{{ article.pk }}';
 
     let chatSocket = new WebSocket(
       'wss://' + window.location.host +
@@ -132,12 +133,14 @@
       console.log({
         'message': message,
         'nickname': nickname,
-        'datetime': new Date().toJSON()
+        'datetime': new Date().toJSON(),
+        'articlePk': articlePk
       });
       chatSocket.send(JSON.stringify({
         'message': message,
         'nickname': nickname,
-        'datetime': new Date().toJSON()
+        'datetime': new Date().toJSON(),
+        'articlePk': articlePk
       }));
 
       messageInputDom.value = '';
