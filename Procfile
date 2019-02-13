@@ -1,1 +1,1 @@
-web: gunicorn mysite.wsgi -w 4 -k uvicorn.workers.UvicornWorker
+web: daphne -b 0.0.0.0 -p 80 mysite.asgi

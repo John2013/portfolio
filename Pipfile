@@ -11,8 +11,7 @@ django = "*"
 python-slugify = "*"
 channels = "*"
 channels-redis = "*"
-gunicorn = "*"
-uvicorn = "*"
+daphne = "*"
 
 [requires]
 python_version = "3.7"
