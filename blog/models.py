@@ -91,3 +91,21 @@ class Article(models.Model):
 				self.pub_date = timezone.now()
 
 		super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+	body = models.TextField('Текст', null=False)
+	nickname = models.TextField('Текст', null=False)
+	datetime = models.DateTimeField('Текст', null=False, blank=True)
+
+	def save(self, *args, **kwargs):
+
+		if self.pk is None:
+			if self.datetime is None:
+				self.datetime = timezone.now()
+
+		super().save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = "Комментарий"
+		verbose_name_plural = "Комментарии"
