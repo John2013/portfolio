@@ -1,1 +1,1 @@
-web: daphne mysite.asgi:application
+web: daphne -b 0.0.0.0 -p 80 mysite.asgi:application
