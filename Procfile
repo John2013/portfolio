@@ -1,1 +1,1 @@
-web: daphne -b 0.0.0.0 -p 8001 --root-path=mysite mysite.asgi:application
+web: gunicorn mysite.wsgi -w 4 -k uvicorn.workers.UvicornWorker
