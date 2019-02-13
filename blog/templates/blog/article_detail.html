@@ -24,7 +24,7 @@
   <section class="comments">
     <h2 class="comments__title">Комментарии</h2>
     <div class="comments__list" id="commentsList">
-      {% for comment in article.comment_set.all %}
+      {% for comment in comments %}
         <article class="comment">
         <header class="comment__header row justify-content-between align-items-baseline">
           <h4 class="comment__author col">{{ comment.nickname }}</h4>
