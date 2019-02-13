@@ -43,6 +43,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		)
 		comment.save()
 
+		print('before room_group_send')
 		# Send message to room group
 		await self.channel_layer.group_send(
 			self.room_group_name,
@@ -53,6 +54,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 				'datetime': datetime,
 			}
 		)
+		print('after room_group_send')
 
 	# Receive message from room group
 	async def chat_message(self, event):
@@ -60,9 +62,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		nickname = event['nickname']
 		datetime = event['datetime']
 
+		print('before send')
 		# Send message to WebSocket
-		await self.send(text_data=json.dumps({
-			'message': message,
-			'nickname': nickname,
-			'datetime': datetime,
-		}))
+		await self.send(
+			text_data=json.dumps(
+				{
+					'message': message,
+					'nickname': nickname,
+					'datetime': datetime,
+				}
+			)
+		)
+
+		print('after send')
