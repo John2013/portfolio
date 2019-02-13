@@ -13,6 +13,8 @@ channels = "*"
 channels-redis = "*"
 daphne = "*"
 django-heroku = "*"
+"psycopg2-binary" = "*"
+twisted = "*"
 
 [requires]
 python_version = "3.7"
