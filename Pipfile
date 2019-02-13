@@ -12,6 +12,7 @@ python-slugify = "*"
 channels = "*"
 channels-redis = "*"
 daphne = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.7"
