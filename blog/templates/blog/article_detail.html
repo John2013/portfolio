@@ -65,7 +65,7 @@
     let roomName = '{{ article.slug }}';
 
     let chatSocket = new WebSocket(
-      'ws://' + window.location.host +
+      'wss://' + window.location.host +
       '/ws/articles/' + roomName + '/');
 
     function getDateString(datetime){
