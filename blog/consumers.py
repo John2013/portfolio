@@ -38,7 +38,7 @@ class ChatConsumer(WebsocketConsumer):
 		article_pk = text_data_json['articlePk']
 
 		comment = Comment(
-			article=Article.objects.get(article_pk),
+			article=Article.objects.get(pk=article_pk),
 			body=message,
 			nickname=nickname,
 			datetime=datetime
