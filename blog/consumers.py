@@ -3,6 +3,8 @@ from channels.generic.websocket import AsyncWebsocketConsumer, \
 	WebsocketConsumer
 import json
 
+from blog.models import Comment
+
 
 class ChatConsumer(WebsocketConsumer):
 	def __init__(self, *args, **kwargs):
@@ -33,6 +35,7 @@ class ChatConsumer(WebsocketConsumer):
 		message = text_data_json['message']
 		nickname = text_data_json['nickname']
 		datetime = text_data_json['datetime']
+		article_pk = text_data_json['articlePk']
 
 		# Send message to room group
 		async_to_sync(self.channel_layer.group_send)(
@@ -44,6 +47,14 @@ class ChatConsumer(WebsocketConsumer):
 				'datetime': datetime,
 			}
 		)
+
+		comment = Comment(
+			article_id=article_pk,
+			body=message,
+			nickname=nickname,
+			datetime=datetime
+		)
+		comment.save()
 
 	# Receive message from room group
 	def chat_message(self, event):

@@ -24,28 +24,16 @@
   <section class="comments">
     <h2 class="comments__title">Комментарии</h2>
     <div class="comments__list" id="commentsList">
-      <article class="comment">
+      {% for comment in comments %}
+        <article class="comment">
         <header class="comment__header row justify-content-between align-items-baseline">
-          <h4 class="comment__author col">author</h4>
-          <small class="comment__time text-muted col-auto">07.02.2019 14:35</small>
+          <h4 class="comment__author col">{{ comment.nickname }}</h4>
+          <small class="comment__time text-muted col-auto">{{ comment.datetime|date:"DATETIME_FORMAT" }}</small>
         </header>
 
-        <div class="comment__body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ipsum labore optio placeat? Aut commodi
-          consequuntur cum dignissimos enim est, facere fugit nemo nihil quibusdam quo tempora, ullam!
-        </div>
+        <div class="comment__body">{{ comment.body }}</div>
       </article>
-      <article class="comment">
-        <header class="comment__header row justify-content-between align-items-baseline">
-          <h4 class="comment__author col">author</h4>
-          <small class="comment__time text-muted col-auto">07.02.2019 14:35</small>
-        </header>
-
-        <div class="comment__body">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ipsum labore optio placeat? Aut commodi
-          consequuntur cum dignissimos enim est, facere fugit nemo nihil quibusdam quo tempora, ullam!
-        </div>
-      </article>
+      {% endfor %}
     </div>
     <div class="comments__form">
       <div class="form-label-group">
@@ -63,6 +51,7 @@
   <!--suppress JSUnusedLocalSymbols -->
   <script>
     let roomName = '{{ article.slug }}';
+    let articlePk = '{{ article.pk }}';
 
     let chatSocket = new WebSocket(
       'wss://' + window.location.host +
@@ -132,12 +121,14 @@
       console.log({
         'message': message,
         'nickname': nickname,
-        'datetime': new Date().toJSON()
+        'datetime': new Date().toJSON(),
+        'articlePk': articlePk
       });
       chatSocket.send(JSON.stringify({
         'message': message,
         'nickname': nickname,
-        'datetime': new Date().toJSON()
+        'datetime': new Date().toJSON(),
+        'articlePk': articlePk
       }));
 
       messageInputDom.value = '';

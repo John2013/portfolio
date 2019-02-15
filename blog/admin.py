@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Article, Tag
+from .models import Article, Tag, Comment
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -29,3 +29,4 @@ class TagsAdmin(admin.ModelAdmin):
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Tag, TagsAdmin)
+admin.site.register(Comment)

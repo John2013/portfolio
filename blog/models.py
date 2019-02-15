@@ -1,18 +1,17 @@
 import datetime
-from uuid import uuid4
 
 from django.db import models
 from django.utils import timezone
 from slugify import slugify
 
 
-def get_slug_temp_value():
-	return '_{}'.format(uuid4())
-
-
 class Tag(models.Model):
 	name = models.CharField('Тэг', max_length=255, null=False, unique=True)
 	slug = models.SlugField(unique=True, blank=True, null=False)
+
+	class Meta:
+		verbose_name = "Тег"
+		verbose_name_plural = "Теги"
 
 	def __str__(self):
 		return self.name
@@ -78,6 +77,10 @@ class Article(models.Model):
 	was_published_recently.boolean = True
 	was_published_recently.short_description = 'Опубликовано недавно?'
 
+	class Meta:
+		verbose_name = "Пост"
+		verbose_name_plural = "Посты"
+
 	def save(self, *args, **kwargs):
 
 		if not self.slug:
@@ -91,3 +94,24 @@ class Article(models.Model):
 				self.pub_date = timezone.now()
 
 		super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+	body = models.TextField('Текст', null=False)
+	nickname = models.CharField('Ник', null=False, max_length=255)
+	datetime = models.DateTimeField('Дата', null=False, blank=True)
+	article = models.ForeignKey(
+		'Article', on_delete=models.CASCADE, null=False
+	)
+
+	def save(self, *args, **kwargs):
+
+		if self.pk is None:
+			if self.datetime is None:
+				self.datetime = timezone.now()
+
+		super().save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = "Комментарий"
+		verbose_name_plural = "Комментарии"

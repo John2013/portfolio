@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
 	'channels',
 	'blog',
+	'portfolio',
 	# 'chat',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -80,7 +81,7 @@ CHANNEL_LAYERS = {
 	'default': {
 		'BACKEND': 'channels_redis.core.RedisChannelLayer',
 		'CONFIG': {
-			"hosts": [('127.0.0.1', 6379)],
+			"hosts": [os.environ.get('REDIS_URL')],
 		},
 	},
 }
