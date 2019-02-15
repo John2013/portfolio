@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.inclusion_tag('main_menu.html')
 def main_menu(request):
-	current_url = resolve(request.path_info).url_name
+	current_url = resolve(request.path_info)
 	items = [
 		('Блог', reverse('blog:index')),
 		('Портфолио', reverse('portfolio:index'))
@@ -14,7 +14,7 @@ def main_menu(request):
 
 	def menu_item_append_active(item):
 		title, url = item
-		return title, url, resolve(url).url_name == current_url
+		return title, url, resolve(url) == current_url
 
 	items = map(
 		menu_item_append_active,
