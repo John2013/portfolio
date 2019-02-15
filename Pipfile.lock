@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c42cc4355895f0c78b5732768c4fde6c0e2da1626f1a5bad17c5407b26e8d93c"
+            "sha256": "621ab85bd5c3a7842b8c539d2912b1faea9e5bdf1bf2ab8bf3b85fb4eb425d92"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -49,11 +49,11 @@
         },
         "autobahn": {
             "hashes": [
-                "sha256:598037a4064fc4bee4acf63e8c27f3d94c15bf37a5e51d560f03850eced79c6d",
-                "sha256:aebbadb700c13792a2967c79002855d1153b9ec8f2949d169e908388699596ff"
+                "sha256:15e058a65b310a813ec7f3fbefca54b7182dfd64bbd46a0310b6b72ca8773c22",
+                "sha256:a70389d2435bc0e961246021e763f3efefee2f2bb73415963c2c004d8990a7d6"
             ],
-            "markers": "python_version != '3.0.*' and python_version != '3.1.*' and python_version >= '2.6'",
-            "version": "==19.1.1"
+            "markers": "python_version >= '2.6' and python_version != '3.1.*' and python_version != '3.0.*'",
+            "version": "==19.2.1"
         },
         "automat": {
             "hashes": [
@@ -195,6 +195,14 @@
                 "sha256:fd509d4aa95404ce8d86b4e32ce66d5d706fd6646c205e1c2a715d87078683a2"
             ],
             "version": "==0.6.1"
+        },
+        "pipe": {
+            "hashes": [
+                "sha256:969e8330cea612688134ce3e244eef92f24513af655c78c4302fda709d750aef",
+                "sha256:b1a589c27ac59ef42f34602c4927f2579dc92179f5f882afe2041202d1fb1449"
+            ],
+            "index": "pypi",
+            "version": "==1.5.0"
         },
         "psycopg2": {
             "hashes": [
