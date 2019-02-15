@@ -14,7 +14,7 @@ def main_menu(request):
 
 	def menu_item_append_active(item):
 		title, url = item
-		return title, url, resolve(url) == current_url
+		return title, url, resolve(url).url_name == current_url
 
 	items = map(
 		menu_item_append_active,
