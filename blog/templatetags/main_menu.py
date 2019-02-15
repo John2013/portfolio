@@ -17,12 +17,12 @@ def main_menu(request):
 		return title, view_name, view_name == current_view_name
 
 	def menu_item_reverse_url(item):
-		title, view_name = item
-		return title, reverse(view_name)
+		title, view_name, active = item
+		return title, reverse(view_name), active
 
 	def process_menu_item(item):
-		item = tuple(menu_item_append_active(item))
-		item = tuple(menu_item_reverse_url(item))
+		item = menu_item_append_active(item)
+		item = menu_item_reverse_url(item)
 		return item
 
 	items = map(
