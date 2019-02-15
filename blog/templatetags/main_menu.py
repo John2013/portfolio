@@ -1,5 +1,6 @@
 from django import template
 from django.urls import reverse, resolve
+from pipe import Pipe
 
 register = template.Library()
 
@@ -12,18 +13,20 @@ def main_menu(request):
 		('Портфолио', 'portfolio:index')
 	]
 
+	@Pipe
 	def menu_item_append_active(item):
 		title, view_name = item
 		return title, view_name, view_name == current_view_name
 
+	@Pipe
 	def menu_item_reverse_url(item):
 		title, view_name, active = item
 		return title, reverse(view_name), active
 
 	def process_menu_item(item):
-		item = menu_item_append_active(item)
-		item = menu_item_reverse_url(item)
-		return item
+		return item \
+			   | menu_item_append_active \
+			   | menu_item_reverse_url
 
 	items = map(
 		process_menu_item,

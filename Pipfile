@@ -14,6 +14,7 @@ channels-redis = "*"
 daphne = "*"
 django-heroku = "*"
 "psycopg2-binary" = "*"
+pipe = "*"
 
 [requires]
 python_version = "3.7"
