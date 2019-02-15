@@ -1,0 +1,10 @@
+<ul class="navbar-nav mr-auto">
+  {% for title, url, active in items %}
+    <li class="nav-item{% if active %} active{% endif %}">
+      <a class="nav-link" href="{{ url }}">{{ title }}{% if active %}
+        <span class="sr-only">(текущая)</span>
+      {% endif %}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
