@@ -11,8 +11,13 @@ def main_menu(request):
 		('Блог', reverse('blog:index')),
 		('Портфолио', reverse('portfolio:index'))
 	]
+
+	def menu_item_append_active(item):
+		title, url = item
+		return title, url, resolve(url) == current_url
+
 	items = map(
-		lambda title, url: (title, url, resolve(url) == current_url),
+		menu_item_append_active,
 		items
 	)
 	return {'items': items}
