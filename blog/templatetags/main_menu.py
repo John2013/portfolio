@@ -28,6 +28,7 @@ def main_menu(request):
 			   | menu_item_append_active \
 			   | menu_item_reverse_url
 
+	# noinspection PyTypeChecker
 	items = map(
 		process_menu_item,
 		items
