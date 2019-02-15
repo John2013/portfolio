@@ -6,18 +6,27 @@ register = template.Library()
 
 @register.inclusion_tag('main_menu.html')
 def main_menu(request):
-	current_url = resolve(request.path_info).view_name
+	current_view_name = resolve(request.path_info).view_name
 	items = [
-		('Блог', reverse('blog:index')),
-		('Портфолио', reverse('portfolio:index'))
+		('Блог', 'blog:index'),
+		('Портфолио', 'portfolio:index')
 	]
 
 	def menu_item_append_active(item):
-		title, url = item
-		return title, url, resolve(url).view_name == current_url
+		title, view_name = item
+		return title, view_name, view_name == current_view_name
+
+	def menu_item_reverse_url(item):
+		title, view_name = item
+		return title, reverse(view_name)
+
+	def process_menu_item(item):
+		item = tuple(menu_item_append_active(item))
+		item = tuple(menu_item_reverse_url(item))
+		return item
 
 	items = map(
-		menu_item_append_active,
+		process_menu_item,
 		items
 	)
 	return {'items': items}
