@@ -1,9 +1,10 @@
 <ul class="navbar-nav mr-auto">
-  <li class="nav-item active">
-    <a class="nav-link" href="/">Блог <span class="sr-only">(текущая)</span></a>
-  </li>
-  <li class="nav-item">
-    <!--suppress HtmlUnknownTarget -->
-    <a class="nav-link" href="{% url 'portfolio:index' %}">Портфолио</a>
-  </li>
+  {% for title, url, active in items %}
+    <li class="nav-item{% if active %} active{% endif %}">
+      <a class="nav-link" href="{{ url }}">{{ title }}{% if active %}
+        <span class="sr-only">(текущая)</span>
+      {% endif %}
+      </a>
+    </li>
+  {% endfor %}
 </ul>
