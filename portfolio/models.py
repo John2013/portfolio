@@ -27,8 +27,8 @@ class Work(models.Model):
 		verbose_name = "Работа"
 		verbose_name_plural = "Работы"
 
-	def _get_unique_slug(self):
-		slug_max_size = self.slug.max_length
+	def _get_unique_slug(self, slug_max_length=50):
+		slug_max_size = slug_max_length
 		slug = slugify(self.name, allow_unicode=True)[:slug_max_size]
 		unique_slug = slug
 		num = 1
