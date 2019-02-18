@@ -17,8 +17,8 @@ class Work(models.Model):
 
 	tags = models.ManyToManyField(Tag, verbose_name='Теги')
 
-	created_at = models.DateTimeField('Создано', auto_now_add=True, blank=True)
-	updated_at = models.DateTimeField('Изменено', auto_now=True, blank=True)
+	created_at = models.DateTimeField('Создано', auto_now_add=True)
+	updated_at = models.DateTimeField('Изменено', auto_now=True)
 
 	def __str__(self):
 		return self.name

@@ -26,10 +26,6 @@ class WorkAdmin(admin.ModelAdmin):
 			'Теги',
 			{'fields': ['tags']}
 		),
-		(
-			'Даты',
-			{'fields': ['created_at', 'updated_at'], 'classes': ['collapse']}
-		),
 	]
 	filter_horizontal = ('tags',)
 	list_display = ('name', 'created_at', 'updated_at')
