@@ -9,6 +9,7 @@ class Work(models.Model):
 		'Название', max_length=255, null=False, default='', unique=True
 	)
 	url = models.URLField()
+	url_source = models.URLField('URL исходников', null=True)
 	short_description = models.CharField('Краткое описание', max_length=63)
 	description = models.TextField('Описание')
 	image = models.ImageField('Изображение')
