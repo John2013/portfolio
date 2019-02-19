@@ -16,6 +16,8 @@ django-heroku = "*"
 "psycopg2-binary" = "*"
 pipe = "*"
 pillow = "*"
+"django-s3-storage" = "*"
+awscli = "*"
 
 [requires]
 python_version = "3.7"

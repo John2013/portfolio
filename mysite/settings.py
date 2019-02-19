@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 	'blog',
 	'portfolio',
 	# 'chat',
+	'django_s3_storage',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -142,13 +143,23 @@ STATIC_ROOT = os.path.join(
 	),
 	'static_files'
 )
+STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'django_s3_storage.storage.S3Storage'
+
+AWS_REGION = "eu-north-1"
+
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
+
+AWS_SESSION_TOKEN = os.environ.get("AWS_SESSION_TOKEN", "")
+
 AWS_STORAGE_BUCKET_NAME = os.environ.get("S3_BUCKET_NAME", "")
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_CUSTOM_DOMAIN = os.environ.get("S3_CUSTOM_DOMAIN", "")
+AWS_S3_ADDRESSING_STYLE = "auto"
+
+
 MEDIA_ROOT = os.environ.get("MEDIA_URL", "")
 MEDIA_URL = '/media/'
 

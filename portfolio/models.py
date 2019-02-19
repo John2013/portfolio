@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils.text import slugify
+from django_s3_storage.storage import S3Storage
 
 from blog.models import Tag
+
+storage = S3Storage(aws_s3_bucket_name='codocalypse')
 
 
 class Work(models.Model):
@@ -12,7 +15,7 @@ class Work(models.Model):
 	url_source = models.URLField('URL исходников', null=True)
 	short_description = models.TextField('Краткое описание', max_length=63)
 	description = models.TextField('Описание')
-	image = models.ImageField('Изображение')
+	image = models.ImageField('Изображение', storage=storage)
 	slug = models.SlugField(null=False, default='', unique=True, blank=True)
 
 	tags = models.ManyToManyField(Tag, verbose_name='Теги')
