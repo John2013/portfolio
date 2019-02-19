@@ -10,3 +10,35 @@ body
 
 .comment
   padding-bottom: 1em
+
+.work
+  position: relative
+
+  &__link
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+
+  &__img
+    height: 320px
+    background-size: cover
+    background-position: center
+
+  &__title
+    padding: 1em
+    transition: all .3s ease
+
+    > h2
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      transition: all .3s ease
+
+  &:hover
+    .work__title
+      background-color: black
+
+      > h2
+        color: white

@@ -3,12 +3,19 @@
 {% block header %}<h1>{% block title %}Портфолио{% endblock %}</h1>{% endblock %}
 
 {% block content %}
-<ul>
-  {% for work in object_list %}
-    <li>{{ work }}</li>
 
-  {% endfor %}
-</ul>
+  <div class="row works-list">
+    {% for work in object_list %}
+      <div class="col-xs-12 col-sm-4 col-lg-6 work">
+        <a href="#" class="work__link">
+          <div class="work__img" style="background-image: url('{{ work.image }}')"></div>
+          <div class="work__title">
+            <h2>{{ work.name }}</h2>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
 
 
 {% endblock %}
