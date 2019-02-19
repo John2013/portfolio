@@ -3,7 +3,12 @@
 {% block header %}<h1>{% block title %}Портфолио{% endblock %}</h1>{% endblock %}
 
 {% block content %}
+<ul>
+  {% for work in works %}
+    <li>{{ work }}</li>
 
-  портфолио
+  {% endfor %}
+</ul>
+
 
 {% endblock %}
