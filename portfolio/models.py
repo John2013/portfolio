@@ -15,7 +15,7 @@ class Work(models.Model):
 	url_source = models.URLField('URL исходников', null=True)
 	short_description = models.TextField('Краткое описание', max_length=63)
 	description = models.TextField('Описание')
-	image = models.ImageField('Изображение', storage=storage)
+	image = models.ImageField('Изображение', storage=storage, upload_to='works')
 	slug = models.SlugField(null=False, default='', unique=True, blank=True)
 
 	tags = models.ManyToManyField(Tag, verbose_name='Теги')
