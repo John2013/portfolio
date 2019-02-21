@@ -147,7 +147,7 @@ STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
 
 DEFAULT_FILE_STORAGE = 'django_s3_storage.storage.S3Storage'
 
-AWS_REGION = "eu-north-1"
+AWS_REGION = "us-east-1"
 
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
